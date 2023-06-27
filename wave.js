@@ -3,9 +3,10 @@ export class Wave {
     constructor() {
         this.totalPoints = 8;
         this.color = ['#000000', '#57356d', '#356d46', '#6d3535', '#000000', '#57356d', '#356d46', '#6d3535']
-        this.radius = 175;
+        // this.radius = 175;
         this.points = [];
         this.rota = 360 / this.totalPoints;
+        this.parts = 100; //round 진행 카운트
     }
 
     resize(stageWidth, stageHeight) {
@@ -25,7 +26,7 @@ export class Wave {
         this.points = [];
 
         for (var i = 0; i < this.totalPoints; i++) {
-            const point = new Point(this.centerX, this.centerY, this.radius, this.rota * i, i);
+            const point = new Point(this.centerX, this.centerY, this.rota * i, i, this.totalPoints, this.parts);
             this.points[i] = point;
         };
     }
@@ -42,7 +43,9 @@ export class Wave {
         // };
         
         ctx.beginPath();
+        // this.points[0].update();
         ctx.moveTo(this.points[0].x, this.points[0].y);
+        console.log(this.points[5].count)
         for (let i=0; i<this.totalPoints-1; i++){
             this.points[i].update();
 
@@ -78,7 +81,6 @@ export class Wave {
             ctx.stroke();
             ctx.fill();
         }
-
     }
     // draw(ctx) {
     //     ctx.fillStyle = this.color;
@@ -94,31 +96,6 @@ export class Wave {
     //     ctx.closePath();
     //     ctx.fill();
         
-    //     for (let i=0; i<this.totalPoints; i++){
-    //         ctx.beginPath();
-    //         this.points[i].update();
-    //         ctx.arc(this.points[i].x, this.points[i].y, 5, 0, 2*Math.PI);
-    //         ctx.closePath();
-    //         ctx.fill();
-            
-    //         ctx.beginPath();
-    //         ctx.arc(this.points[i].X1, this.points[i].Y1, 5, 0, 2*Math.PI);
-    //         ctx.closePath();
-    //         ctx.fill();
-            
-    //         ctx.beginPath();
-    //         ctx.arc(this.points[i].X2, this.points[i].Y2, 5, 0, 2*Math.PI);
-    //         ctx.closePath();
-    //         ctx.fill();
-    //     }
-        
-    //     for (let i=0; i<this.totalPoints; i++){
-    //         ctx.beginPath();
-    //         ctx.moveTo(this.points[i].X1, this.points[i].Y1);
-    //         ctx.lineTo(this.points[i].X2, this.points[i].Y2);
-    //         ctx.stroke();
-    //         ctx.fill();
-    //     }
 
 
         
